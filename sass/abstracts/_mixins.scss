@@ -1,0 +1,51 @@
+@mixin clearfix { // clearfix appends a pseudo element after the target element.
+
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0-600PX: Phone
+600-900px: Tablet protrait
+900-1200px: Tablet landscape
+1200-1800px is where our normal style apply
+1000px + 1: Big desktop
+
+$breakpoint argument choices:
+-phone
+-tab-portrait
+-tab-landscape
+--big desktop
+
+ORDER: base > typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content };   //600px
+    }
+    @if $breakpoint == tab-portrait {
+        @media only screen and (max-width: 56.25em) { @content };   //900px
+    }
+    @if $breakpoint == tab-landscape {
+        @media only screen and (max-width: 75em) { @content };   //1200px
+    }
+    @if $breakpoint == big desktop {
+        @media only screen and (min-width: 112.5em) { @content };   //1800px
+    }
+    
+    
+}
